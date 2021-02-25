@@ -1,0 +1,55 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Profile Info{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Info</h6>
+            </div>
+            <div class="card-body">
+                <header>
+                     <div class="profile-user-info">
+                        <h3>
+                           {{ object.first_name }} {{ object.last_name }}
+                        </h3>
+                        <p>
+                           {{ object.phone }}
+                        </p>
+                        <p>
+                           <strong>Email: </strong> {{ object.email }}
+                        </p>
+                        <p>
+                           <strong>Registered on</strong> {{ object.created }}
+                        </p>
+                     </div>
+
+                     <img src="" alt='' />
+                </header>
+                <section class="profile-stats">
+                     <div class="stats-accounts">
+                        <strong>{{ object.bank_accounts.count }}</strong>
+                        <span>Accounts</span>
+                     </div>
+                     <div class="stats-balance">
+                        <strong>{stats.accsDetails.balance}</strong>
+                        <span>Balance</span>
+                     </div>
+                     <div class="stats-messages">
+                        <strong>{stats.messagesCount}</strong>
+                        <span>Messages</span>
+                     </div>
+              </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

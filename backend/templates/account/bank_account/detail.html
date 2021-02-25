@@ -1,0 +1,32 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Account Detail{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Account Bank</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Info</h6>
+            </div>
+            <div class="card-body module">
+                <h1>{{ object.get_account_type_display }} account</h1>
+                <ul>
+                    <li>Sortcode: {{ object.sort_code }}</li>
+                    <li>Number: {{ object.number }}</li>
+                    <li>Currency: {{ object.get_currency_display }}</li>
+                    <li>
+                       Balance: {{ object.current_balance }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

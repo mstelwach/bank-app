@@ -1,0 +1,75 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Transfer Create{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Create Transfer!</h1>
+                    </div>
+                    <form action="{{ app_path }}" method="post" class="user">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form.sender }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.receiver }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form.title }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.amount }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form.reference }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.method }}
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Send Money</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}
+
+{% block body_scripts_additional %}
+    <script>
+        $("#id_sender").focusout(function (e) {
+            e.preventDefault();
+            // GET sender account id
+            const sender = $(this).val();
+            // GET AJAX request
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'transfer:create' %}",
+                data: {
+                    sender: sender,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (response) {
+                    const senderMaxAmount = response['sender_max_amount'];
+                    $("#id_amount").attr({
+                        'max': senderMaxAmount
+                    })
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        });
+    </script>
+{% endblock %}

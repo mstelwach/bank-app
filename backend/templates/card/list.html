@@ -1,0 +1,48 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Card List{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Cards</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 justify-content-between d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">List</h6>
+                <a href="{% url 'card:create' %}" class="btn btn-primary">
+                    New Card
+                </a>
+            </div>
+            <div class="card-body">
+                <p>There are {{ object_list.count }} cards right now!</p>
+                <div class="list-group">
+                    {% for card in object_list %}
+                          <a href="{% url 'card:detail' pk=card.pk %}" class="list-group-item list-group-item-action">
+                             <div class="d-flex w-100 justify-content-between">
+                                 <h5 class="mb-1">Credit Card</h5>
+                                 <small class="text-muted">
+                                   Expires: {{ card.expires_date }}
+                                 </small>
+                             </div>
+                             <p class="mb-1">Number: {{ card.number }}</p>
+                             <small class="text-muted">
+                                Daily limits: {{ card.daily_online_limit }} (online), {{ card.daily_withdrawal_limit }} (withdrawal)
+                             </small>
+                             <br />
+                             <small class="text-muted">
+                                Monthly limits: {{ card.monthly_online_limit }} (online), {{ card.monthly_withdrawal_limit }} (withdrawal)
+                             </small>
+                          </a>
+                        <br />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

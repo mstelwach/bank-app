@@ -1,0 +1,38 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Card Detail{% endblock title %}
+{% block head_scripts_additional %}
+    <link href="{% static 'css/details.scss' %}" rel="stylesheet" type="text/css">
+{% endblock head_scripts_additional %}
+
+{% block content %}
+
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Card Bank</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Info</h6>
+            </div>
+            <div class="card-body module">
+                <h1><strong>Card number:</strong> {{ object.number }}</h1>
+                <div class="card-details-row card-details-row-1-2">
+                    <div>
+                       <span>Card holder</span>
+                       <p>{{ object.account }}</p>
+                    </div>
+                    <div>
+                       <span>Expiration date</span>
+                       <p>
+                          {{ object.expires_date }}
+                       </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

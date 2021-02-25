@@ -1,0 +1,46 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Transfers List{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Transfers</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 justify-content-between d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">Outgoing</h6>
+                <a href="{% url 'transfer:create' %}" class="btn btn-primary">
+                    New transfer
+                </a>
+            </div>
+            <div class="card-body">
+                <p>There are {{ object_list.count }} transfers right now!</p>
+                <div class="list-group">
+                    {% for transfer in object_list %}
+                          <a href="{% url 'transfer:detail' pk=transfer.pk %}" class="list-group-item list-group-item-action">
+                                 <div class="d-flex w-100 justify-content-between">
+                                     <h5 class="mb-1">
+                                         <strong>Receiver: </strong>{{ transfer.receiver }}
+                                     </h5>
+                                    <small class="text-muted">Status: {{ transfer.get_status_display }}</small>
+                                 </div>
+                                <p>
+                                    <strong>Transfer: </strong>{{ transfer.get_method_display }}
+                                </p>
+                                 <p class="mb-1">
+                                    <b>Title:</b> {{ transfer.title }} / <b>Date:</b> {{ transfer.created }} / <b>Amount:</b> {{ transfer.amount }}
+                                 </p>
+                                 <small class="text-muted">Reference: {{ transfer.reference }}</small>
+                          </a>
+                        <br />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

@@ -1,0 +1,45 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }} - Accounts Bank List{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Accounts Bank</h1>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 justify-content-between d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">List</h6>
+                <a href="{% url 'account:bank-account-create' %}" class="btn btn-primary">
+                    New Bank Account
+                </a>
+            </div>
+            <div class="card-body">
+                <p>You have {{ object_list.count }} accounts</p>
+                <div class="list-group">
+                    {% for account in object_list %}
+                        <a class="list-group-item list-group-item-action" href="{% url 'account:bank-account-detail' pk=account.pk %}">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ account.get_account_type_display }} account</h5>
+                                <small class="text-muted">Active</small>
+                            </div>
+                            <p class="mb-1">
+                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
+                                blandit.
+                            </p>
+                            <small class="text-muted">
+                                Sortcode: {{ account.sort_code }}, currency: {{ account.currency }}, balance: {{ account.current_balance }}
+                            </small>
+                        </a>
+                        <br />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

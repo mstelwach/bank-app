@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, ListView, TemplateView
@@ -140,6 +141,22 @@ class HomePage(LoginRequiredMixin, TemplateView):
                 'incoming_count': monthly_transfers_count['incoming'],
                 'outgoing_count': monthly_transfers_count['outgoing']
             })
+
+
+def custom_page_not_found(request, exception):
+    return render(request, 'handlers/404.html')
+
+
+def custom_server_error(request):
+    return render(request, 'handlers/500.html')
+
+
+def custom_permission_denied(request, exception):
+    return render(request, 'handlers/403.html')
+
+
+def custom_bad_request(request, exception):
+    return render(request, 'handlers/400.html')
 
 
 class Login(LoginView):

@@ -274,4 +274,3 @@ const pieChartCountTransfers = new Chart(ctxCountTransfers, {
     cutoutPercentage: 80,
   },
 });
-

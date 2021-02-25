@@ -61,3 +61,8 @@ urlpatterns_api = [
 ]
 
 urlpatterns += urlpatterns_api
+
+handler404 = 'account.views.custom_page_not_found'
+handler500 = 'account.views.custom_server_error'
+handler403 = 'account.views.custom_permission_denied'
+handler400 = 'account.views.custom_bad_request'

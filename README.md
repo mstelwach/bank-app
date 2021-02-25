@@ -22,5 +22,8 @@ Uses the default Django development server.
 Test it out at http://localhost:8000. \
 The "backend" folder is mounted into the container and your code changes apply automatically.
 
+##### If you want to use Swagger to document the API:
+http://localhost:8000/api/swagger
+
 ##### Tools to run the application::
 * [docker] - https://www.docker.com/get-started

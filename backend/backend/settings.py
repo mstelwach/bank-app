@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'fontawesome-free',
     'account',
     'card',
-    'transfer'
+    'transfer',
+    'rest_framework',
+    'django_filters',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +149,22 @@ LOGIN_URL = 'account:login'
 LOGOUT_URL = 'account:logout'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'account:login'
+
+
+# REST FRAMEWORK DEFAULT SETTINGS
+
+LOGIN_API_URL = 'rest_framework:login'
+LOGOUT_API_URL = 'rest_framework:logout'
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+# SWAGGER DEFAULT SETTINGS
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_MODEL_RENDERING': 'example',
+    'LOGIN_URL': LOGIN_API_URL,
+    'LOGOUT_URL': LOGOUT_API_URL,
+}

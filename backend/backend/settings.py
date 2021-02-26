@@ -157,7 +157,12 @@ LOGIN_API_URL = 'rest_framework:login'
 LOGOUT_API_URL = 'rest_framework:logout'
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAdminUser',
+    ],
+    'LOGIN_URL': LOGIN_API_URL
+
 }
 
 
